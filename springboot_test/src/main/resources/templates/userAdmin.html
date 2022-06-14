@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用户数据维护</title>
+    <style>
+        td,th{
+            border: solid gray 1px;
+            text-align: center;
+        }
+        img{
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <thead>
+        <th>序号</th>
+        <th>部门</th>
+        <th>用户组</th>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>身份证号</th>
+        <th>地址</th>
+        <th>手机号</th>
+        <th>头像</th>
+        <th>操作</th>
+    </thead>
+    <tbody>
+    <tr th:each="user,userStat:${users}"><!---->
+        <td th:text="${userStat.index+1}"></td><!--序号-->
+        <td th:text="${user.departmentName}"></td><!--部门-->
+        <td th:text="${user.userGroupName}"></td><!--用户组-->
+        <td th:text="${user.userName}"></td><!--姓名-->
+        <td th:switch="${user.userSex}">
+            <div th:case="0">男</div>
+            <div th:case="1">女</div>
+        </td>
+        <td th:text="${user.idCard}"></td><!--身份证号-->
+        <td th:text="${user.userAddress}"></td><!--地址-->
+        <td th:text="${user.userPhone}"></td><!--手机号-->
+        <td><img th:src="${'/user/getPortraitImage/'+user.userImage}"></td><!--头像-->
+        <td><a th:href="@{/user/update(id=${user.userId})}">修改</a>|<a th:href="@{/user/delete(id=${user.userId})}">删除</a></td><!--操作-->
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/user/insert}">新增用户</a>
+</body>
+</html>
