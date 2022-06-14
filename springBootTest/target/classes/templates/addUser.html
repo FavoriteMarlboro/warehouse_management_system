@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>新增</h1>
+    <form enctype="multipart/form-data" th:method="post" th:action="@{/home/addUser}">
+        <div>
+            <label>所在部门</label>
+            <select th:name="department_id">
+                <option th:each="department,departmentState:${departments}" th:value="${department.department_id}" th:text="${department.department_name}"></option>
+            </select>
+        </div>
+        <div>
+            <label>所在用户组</label>
+            <select th:name="user_group_id">
+                <option th:each="group,groupState:${groups}" th:value="${group.user_group_id}" th:text="${group.user_group_name}"></option>
+            </select>
+        </div>
+        <div>
+            <label>用户姓名</label>
+            <input type="text" th:name="user_name">
+        </div>
+        <div>
+            <label>用户性别</label>
+            <input type="radio" th:name="user_sex" checked th:value="1"> 男
+            <input type="radio" th:name="user_sex" th:value="2">女
+        </div>
+        <div>
+            <label>身份证号</label>
+            <input type="text" th:name="ID_Card">
+        </div>
+        <div>
+            <label>用户地址</label>
+            <input type="text" th:name="user_address">
+        </div>
+        <div>
+            <label>用户手机号</label>
+            <input type="text" th:name="user_phone">
+        </div>
+        <div>
+            <label>用户密码</label>
+            <input type="password" th:name="user_password">
+        </div>
+        <div>
+            <label>用户头像</label>
+            <input type="file" th:name="user_img">
+        </div>
+        <button type="submit">提交</button>
+    </form>
+</body>
+</html>
